@@ -1,0 +1,6 @@
+@VehicleTable.Server_HostAddress = http://localhost:5212
+
+GET {{VehicleTable.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
