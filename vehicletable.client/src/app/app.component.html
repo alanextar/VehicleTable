@@ -1,29 +1,36 @@
 <div>
-  <h3>Vehicles table</h3>
+  <h3>Транспорт</h3>
   <dx-data-grid id="gridContainer"
                 [dataSource]="dataSource"
-                [remoteOperations]="false"
+                [remoteOperations]="true"
                 [showColumnLines]="true"
                 [showBorders]="true"
                 [allowColumnReordering]="true"
                 [rowAlternationEnabled]="false"
-                [showBorders]="true"
                 [width]="'100%'">
     <dxo-paging [pageSize]="25"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true"
                [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
     <dxo-search-panel [visible]="true"
                       [highlightCaseSensitive]="true"></dxo-search-panel>
-    <dxo-group-panel [visible]="true"></dxo-group-panel>
-    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxi-column dataField="cTitle"
+                caption="Наименование"
+                dataType="string">
+    </dxi-column>
+    <dxi-column dataField="cSalerName"
+                caption="Продавец"
+                dataType="string">
+    </dxi-column>
     <dxi-column dataField="cDescription"
-                caption="Description"
-                dataType="string"
-                alignment="right">
+                caption="Описание"
+                dataType="string">
     </dxi-column>
     <dxi-column dataField="cOriginDate"
-                caption="Origin date"
+                caption="Дата производства"
                 dataType="date"
+                format="dd.MM.yyyy"
+                [allowSearch]="true"
                 alignment="right"></dxi-column>
   </dx-data-grid>
 </div>

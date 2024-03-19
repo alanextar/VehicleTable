@@ -6,6 +6,8 @@ using VehicleTable.Server;
 
 namespace VehicleTable
 {
+    [ApiController]
+    [Route("[controller]")]
     public class VehiclesController : Controller
     {
         private readonly ApplicationContext _context;
@@ -15,11 +17,17 @@ namespace VehicleTable
             _context = context;
         }
 
-        [HttpGet("vehicles")]
-
+        [HttpGet]
         public async Task<LoadResult> Get(DataSourceLoadOptions loadOptions)
         {
-            var vehicles = _context.Vehicles.AsNoTracking();
+            var vehicles = _context.Vehicles.AsNoTracking().Select(vehicle => new VehicleDto
+            {
+                CId = vehicle.CId,
+                CTitle = vehicle.CTitle,
+                CSalerName = vehicle.CSalerName,
+                COriginDate = vehicle.COriginDate,
+                CDescription = vehicle.CDescription,
+            });
             var result = await DataSourceLoader.LoadAsync(vehicles, loadOptions);
 
             return result;

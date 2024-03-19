@@ -5,7 +5,6 @@ import DataSource from 'devextreme/data/data_source';
 import { DxBulletModule, DxTemplateModule } from 'devextreme-angular';
 import { DxDataGridModule, DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import { Service } from './app.service';
-import { DataService } from './data.service';
 import { provideHttpClient } from '@angular/common/http';
 
 
@@ -21,13 +20,7 @@ export class AppComponent {
   collapsed = false;
 
   contentReady = (e: DxDataGridTypes.ContentReadyEvent) => {
-    if (!this.collapsed) {
-      this.collapsed = true;
-      e.component.expandRow(['EnviroCare']);
-    }
   };
-
-  customizeTooltip = ({ originalValue }: Record<string, string>) => ({ text: `${parseInt(originalValue)}%` });
 
   constructor(service: Service) {
     this.dataSource = service.getDataSource();
