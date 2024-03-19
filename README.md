@@ -4,3 +4,4 @@
 
 Для просмотра демонстрации и использования таблицы, вы можете перейти по ссылке ниже:
 [Демо таблицы транспортных средств DevExtreme](https://js.devexpress.com/Angular/Demos/WidgetsGallery/Demo/DataGrid/Overview/MaterialBlueLight/)
+![Анимация](resources/demo.gif)
