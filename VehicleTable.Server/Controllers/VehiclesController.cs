@@ -26,7 +26,9 @@ namespace VehicleTable
                 CTitle = vehicle.CTitle,
                 CSalerName = vehicle.CSalerName,
                 COriginDate = vehicle.COriginDate,
-                CDescription = vehicle.CDescription,
+                CDescription = vehicle.CDescription != null && vehicle.CDescription.Length > 250 ?
+                                            (vehicle.CDescription.Substring(250) + "...") : 
+                                            vehicle.CDescription,
             });
             var result = await DataSourceLoader.LoadAsync(vehicles, loadOptions);
 
