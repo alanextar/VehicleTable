@@ -1,5 +1,6 @@
 
 using AutoMapper;
+using dotenv.net;
 
 namespace VehicleTable.Server
 {
@@ -7,6 +8,7 @@ namespace VehicleTable.Server
     {
         public static void Main(string[] args)
         {
+            DotEnv.Fluent().WithProbeForEnv(10).Load();
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
@@ -22,6 +24,7 @@ namespace VehicleTable.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             
+            builder.Services.AddSingleton<Config>();
             builder.Services.AddTransient<ApplicationContext>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
