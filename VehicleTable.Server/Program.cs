@@ -1,4 +1,6 @@
 
+using AutoMapper;
+
 namespace VehicleTable.Server
 {
     public class Program
@@ -21,6 +23,7 @@ namespace VehicleTable.Server
             builder.Services.AddSwaggerGen();
             
             builder.Services.AddTransient<ApplicationContext>();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

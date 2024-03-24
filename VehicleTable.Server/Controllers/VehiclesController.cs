@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
 using DevExtreme.AspNet.Data;
 using DevExtreme.AspNet.Data.ResponseModel;
+using Microsoft.AspNetCore.Mvc;
 using VehicleTable.Server;
 
 namespace VehicleTable
@@ -11,25 +11,18 @@ namespace VehicleTable
     public class VehiclesController : Controller
     {
         private readonly ApplicationContext _context;
+        private readonly IMapper mapper;
 
-        public VehiclesController(ApplicationContext context)
+        public VehiclesController(ApplicationContext context, IMapper mapper)
         {
             _context = context;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<LoadResult> Get(DataSourceLoadOptions loadOptions)
         {
-            var vehicles = _context.Vehicles.AsNoTracking().Select(vehicle => new VehicleDto
-            {
-                CId = vehicle.CId,
-                CTitle = vehicle.CTitle,
-                CSalerName = vehicle.CSalerName,
-                COriginDate = vehicle.COriginDate,
-                CDescription = vehicle.CDescription != null && vehicle.CDescription.Length > 250 ?
-                                            (vehicle.CDescription.Substring(250) + "...") : 
-                                            vehicle.CDescription,
-            });
+            var vehicles = mapper.ProjectTo<VehicleDto>(_context.Vehicles, null);
             var result = await DataSourceLoader.LoadAsync(vehicles, loadOptions);
 
             return result;
